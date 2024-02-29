@@ -10,7 +10,7 @@ import br.dev.nina.sprachklang.dictionarysearch.data.source.db.entities.EntryEnt
 @Database(
     entities = [EntryEntity::class, DefinitionEntity::class],
     version = 1,
-    exportSchema = false
+    exportSchema = true
 )
 @TypeConverters(DictionaryConverters::class)
 abstract class DictionaryDatabase: RoomDatabase() {
