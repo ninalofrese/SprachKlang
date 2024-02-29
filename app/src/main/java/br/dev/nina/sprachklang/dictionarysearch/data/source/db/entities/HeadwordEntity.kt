@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 
 @Entity(tableName = "Entries")
 @JsonClass(generateAdapter = true)
-data class EntryEntity(
+data class HeadwordEntity(
     @PrimaryKey
     @ColumnInfo(name = "entry_id")
     val id: Int? = null,
