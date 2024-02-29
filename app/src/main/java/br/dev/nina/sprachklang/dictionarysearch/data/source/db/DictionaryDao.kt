@@ -28,5 +28,5 @@ interface DictionaryDao {
         LEFT JOIN Definitions ON entries.entry_id = definitions.word_id
         WHERE entry_id == :wordId
     """)
-    fun getWordDetails(wordId: Int): Pair<EntryEntity, List<DefinitionEntity>>
+    fun getWordDetails(wordId: Int): Map<EntryEntity, List<DefinitionEntity>>
 }

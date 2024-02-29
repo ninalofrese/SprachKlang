@@ -19,6 +19,7 @@ object AppModule {
     fun provideDictionaryDatabase(@ApplicationContext appContext: Context): DictionaryDatabase {
         return Room.databaseBuilder(appContext, DictionaryDatabase::class.java, "dictionaryDb")
             .createFromAsset("databases/GermanAusspracheDictionary.db")
+            .fallbackToDestructiveMigration()
             .build()
     }
 
