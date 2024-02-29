@@ -5,10 +5,10 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import br.dev.nina.sprachklang.dictionarysearch.data.source.db.entities.DefinitionEntity
 import br.dev.nina.sprachklang.dictionarysearch.data.source.db.entities.DictionaryConverters
-import br.dev.nina.sprachklang.dictionarysearch.data.source.db.entities.EntryEntity
+import br.dev.nina.sprachklang.dictionarysearch.data.source.db.entities.HeadwordEntity
 
 @Database(
-    entities = [EntryEntity::class, DefinitionEntity::class],
+    entities = [HeadwordEntity::class, DefinitionEntity::class],
     version = 1,
     exportSchema = true
 )
