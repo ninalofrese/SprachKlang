@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.dictionarysearch.domain.model
+package br.dev.nina.sprachklang.core.domain.dictionary.model
 
 data class Definition(
     val glosses: List<String>?,
