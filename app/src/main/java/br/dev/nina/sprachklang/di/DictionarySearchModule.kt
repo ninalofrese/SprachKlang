@@ -1,7 +1,7 @@
 package br.dev.nina.sprachklang.di
 
-import br.dev.nina.sprachklang.dictionarysearch.data.DictionaryRepositoryImpl
-import br.dev.nina.sprachklang.dictionarysearch.domain.DictionaryRepository
+import br.dev.nina.sprachklang.core.data.dictionary.DictionaryRepositoryImpl
+import br.dev.nina.sprachklang.core.domain.dictionary.DictionaryRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

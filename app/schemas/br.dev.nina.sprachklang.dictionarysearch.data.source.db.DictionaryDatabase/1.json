@@ -2,17 +2,17 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "1dbdddd433f49b05159aa5bf95cd6f92",
+    "identityHash": "d8195b2101058955b18eacd737985017",
     "entities": [
       {
-        "tableName": "Entries",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`entry_id` INTEGER, `word` TEXT NOT NULL, `pos` TEXT NOT NULL, `lang_code` TEXT NOT NULL, `ipas` TEXT, `ogg_urls` TEXT, PRIMARY KEY(`entry_id`))",
+        "tableName": "Headwords",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `word` TEXT NOT NULL, `pos` TEXT NOT NULL, `lang_code` TEXT NOT NULL, `ipas` TEXT, `ogg_urls` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
-            "columnName": "entry_id",
+            "columnName": "id",
             "affinity": "INTEGER",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "word",
@@ -48,7 +48,7 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "entry_id"
+            "id"
           ]
         },
         "indices": [],
@@ -56,11 +56,11 @@
       },
       {
         "tableName": "Definitions",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `word_id` INTEGER NOT NULL, `glosses` TEXT, `synonyms` TEXT, `related_words` TEXT, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`def_id` TEXT NOT NULL, `word_id` INTEGER NOT NULL, `glosses` TEXT, `synonyms` TEXT, `related_words` TEXT, PRIMARY KEY(`def_id`), FOREIGN KEY(`word_id`) REFERENCES `Headwords`(`id`) ON UPDATE NO ACTION ON DELETE NO ACTION )",
         "fields": [
           {
             "fieldPath": "id",
-            "columnName": "id",
+            "columnName": "def_id",
             "affinity": "TEXT",
             "notNull": true
           },
@@ -92,17 +92,29 @@
         "primaryKey": {
           "autoGenerate": false,
           "columnNames": [
-            "id"
+            "def_id"
           ]
         },
         "indices": [],
-        "foreignKeys": []
+        "foreignKeys": [
+          {
+            "table": "Headwords",
+            "onDelete": "NO ACTION",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "word_id"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1dbdddd433f49b05159aa5bf95cd6f92')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd8195b2101058955b18eacd737985017')"
     ]
   }
 }
