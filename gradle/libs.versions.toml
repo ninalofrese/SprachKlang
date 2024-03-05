@@ -6,7 +6,7 @@ androidx-test-ext-junit = "1.1.5"
 compose-bom = "2024.02.01"
 core-ktx = "1.12.0"
 espresso-core = "3.5.1"
-hilt = "2.49"
+hilt = "2.50"
 hilt-navigation-compose = "1.2.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
@@ -23,7 +23,7 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
-compose-material = { module = "androidx.compose.material:material" }
+compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
@@ -65,7 +65,7 @@ compose = [
     "compose-ui",
     "compose-ui-tooling-preview",
     "compose-ui-graphics",
-    "compose-material"
+    "compose-material3"
 ]
 
 compose-integrations = [
