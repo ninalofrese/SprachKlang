@@ -1,43 +1,54 @@
 package br.dev.nina.sprachklang.home.presentation
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.semantics.isTraversalGroup
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import br.dev.nina.sprachklang.dictionarysearch.presentation.DictionarySearchEvent
-import br.dev.nina.sprachklang.dictionarysearch.presentation.DictionarySearchResults
-import br.dev.nina.sprachklang.dictionarysearch.presentation.SearchBar
+import br.dev.nina.sprachklang.R
 
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onNavigateToWordDetail: (Int) -> Unit
+    onNavigateToSearch: () -> Unit
 ) {
-    val searchStateHolder = viewModel.searchStateHolder
+    Column(modifier = Modifier.fillMaxSize()) {
+        SearchButton(onNavigateToSearch, modifier = Modifier.padding(16.dp).fillMaxWidth())
+    }
+}
 
-    Column(modifier = Modifier.semantics { isTraversalGroup = true }) {
-        SearchBar(
-            state = searchStateHolder.state,
-            onSearchQueryChange = {
-                viewModel.searchStateHolder.onEvent(DictionarySearchEvent.OnSearchQueryChange(it))
-            }
+@Composable
+fun SearchButton(
+    onNavigateToSearch: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    OutlinedButton(
+        onClick = { onNavigateToSearch() },
+        contentPadding = PaddingValues(horizontal = 16.dp, vertical = 16.dp),
+        modifier = modifier.semantics(mergeDescendants = true) { }
+    ) {
+        Icon(imageVector = Icons.Default.Search, contentDescription = stringResource(R.string.search))
+        Spacer(Modifier.size(8.dp))
+        Text(
+            text = stringResource(R.string.search_cta),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            modifier = Modifier.weight(1f)
         )
-        if (searchStateHolder.state.items.isNotEmpty()) {
-            DictionarySearchResults(
-                state = searchStateHolder.state,
-                loadNextItems = {
-                    viewModel.searchStateHolder.onEvent(DictionarySearchEvent.OnLoadNextItems)
-                },
-                modifier = Modifier
-                    .fillMaxSize(),
-                onClick = { onNavigateToWordDetail(it) }
-            )
-        } else {
-            Text(text = "Home")
-        }
     }
 }

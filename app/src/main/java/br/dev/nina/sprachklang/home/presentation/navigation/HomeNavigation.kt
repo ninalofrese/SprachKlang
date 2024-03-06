@@ -13,9 +13,9 @@ fun NavController.navigateToHome() {
 
 fun NavGraphBuilder.homeScreen(
     onNavigateBack: () -> Unit,
-    onNavigateToWordDetail: (Int) -> Unit
+    onNavigateToSearch: () -> Unit
 ) {
     composable(route = HOME_ROUTE) {
-        HomeScreen(onNavigateToWordDetail = { onNavigateToWordDetail(it) })
+        HomeScreen(onNavigateToSearch = { onNavigateToSearch() })
     }
 }

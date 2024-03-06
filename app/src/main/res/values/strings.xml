@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">SprachKlang</string>
-    <string name="search_german_words">Search German words</string>
     <string name="clear_search_input">Clear search input</string>
     <string name="go_back">Go Back</string>
     <string name="play_pronunciation_audio">Play pronunciation audio</string>
@@ -8,4 +7,6 @@
     <string name="definition">Definition</string>
     <string name="related_words">"Related words: "</string>
     <string name="synonyms">"Synonyms: "</string>
+    <string name="search_cta">Search German words</string>
+    <string name="search">Search</string>
 </resources>
