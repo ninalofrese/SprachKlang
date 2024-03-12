@@ -15,11 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SprachKlang"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu">
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.SprachKlang">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
