@@ -9,6 +9,8 @@ import br.dev.nina.sprachklang.home.presentation.navigation.HOME_ROUTE
 import br.dev.nina.sprachklang.home.presentation.navigation.homeScreen
 import br.dev.nina.sprachklang.word.presentation.navigation.navigateToWord
 import br.dev.nina.sprachklang.word.presentation.navigation.wordScreen
+import br.dev.nina.sprachklang.wordlist.navigation.navigateToWordlist
+import br.dev.nina.sprachklang.wordlist.navigation.wordlistScreen
 
 @Composable
 fun RootHost() {
@@ -20,7 +22,8 @@ fun RootHost() {
     ) {
         homeScreen(
             onNavigateBack = { navController.popBackStack() },
-            onNavigateToSearch = { navController.navigateToSearch() }
+            onNavigateToSearch = { navController.navigateToSearch() },
+            onNavigateToWordList = { navController.navigateToWordlist(it) }
         )
         searchScreen(
             onNavigateBack = { navController.popBackStack() },
@@ -30,6 +33,13 @@ fun RootHost() {
             onNavigateBack = {
                 navController.popBackStack()
             },
+        )
+        wordlistScreen(
+            onNavigateBack = {
+                navController.popBackStack()
+            },
+            onNavigateToWord = { navController.navigateToWord(it) },
+            onNavigateToSearch = { navController.navigateToSearch() }
         )
     }
 }

@@ -3,7 +3,7 @@ package br.dev.nina.sprachklang.home.presentation.navigation
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import br.dev.nina.sprachklang.home.presentation.HomeScreen
+import br.dev.nina.sprachklang.home.presentation.HomeRoute
 
 const val HOME_ROUTE = "home"
 
@@ -13,9 +13,13 @@ fun NavController.navigateToHome() {
 
 fun NavGraphBuilder.homeScreen(
     onNavigateBack: () -> Unit,
-    onNavigateToSearch: () -> Unit
+    onNavigateToSearch: () -> Unit,
+    onNavigateToWordList: (Int) -> Unit
 ) {
     composable(route = HOME_ROUTE) {
-        HomeScreen(onNavigateToSearch = { onNavigateToSearch() })
+        HomeRoute(
+            onNavigateToSearch = onNavigateToSearch,
+            onNavigateToWordlist = onNavigateToWordList
+        )
     }
 }
