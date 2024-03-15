@@ -3,17 +3,23 @@ activity-compose = "1.8.2"
 agp = "8.2.2"
 androidx-room = "2.6.1"
 androidx-test-ext-junit = "1.1.5"
-compose-bom = "2024.02.01"
+arch-core = "2.2.0"
+compose-bom = "2024.02.02"
 core-ktx = "1.12.0"
+core-testing = "1.5.0"
 espresso-core = "3.5.1"
+google-truth = "1.1.5"
 hilt = "2.50"
 hilt-navigation-compose = "1.2.0"
 junit = "4.13.2"
 kotlin = "1.9.22"
+kotlinx-coroutines-test = "1.8.0"
 ksp = "1.9.22-1.0.17"
 ktlint = "12.1.0"
 lifecycle = "2.7.0"
+mockk = "1.13.9"
 moshi = "1.15.1"
+turbine = "1.0.0"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
@@ -21,6 +27,7 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "androidx-room" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+arch-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "arch-core" }
 compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "compose-bom" }
 compose-material3 = { module = "androidx.compose.material3:material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
@@ -30,16 +37,24 @@ compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-mani
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+core-testing = { group = "androidx.test", name = "core", version.ref = "core-testing" }
+core-ktx-testing = { group = "androidx.test", name = "core-ktx", version.ref = "core-testing" }
 espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
+google-truth = { module = "com.google.truth:truth", version.ref = "google-truth" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+hilt-android-testing = { module = "com.google.dagger:hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test"}
 lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
+lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycle" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+mockk-android = { module = "io.mockk:mockk", version.ref = "mockk" }
 moshi-codegen = { module = "com.squareup.moshi:moshi-kotlin-codegen", version.ref = "moshi" }
 moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
+turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -77,4 +92,23 @@ compose-integrations = [
 compose-debug = [
     "compose-ui-tooling",
     "compose-ui-test-manifest"
+]
+
+testing = [
+    "junit",
+    "google-truth",
+    "turbine",
+    "kotlinx-coroutines-test",
+    "mockk"
+]
+
+testing-android = [
+    "junit",
+    "core-testing",
+    "core-ktx-testing",
+    "androidx-test-ext-junit",
+    "arch-core-testing",
+    "google-truth",
+    "mockk-android",
+    "compose-ui-test-junit4"
 ]
