@@ -1,8 +1,8 @@
-<div style="text-align: center;">
-    # SprachKlang App 🇩🇪
+# SprachKlang App 🇩🇪
 
-    Offline-first and accessibility-mindful app to learn the pronunciation of German words.
-</div>
+Offline-first and accessibility-mindful app to learn the pronunciation of German words.
+
+---
 
 ## Features
 
