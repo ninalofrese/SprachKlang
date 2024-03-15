@@ -1,45 +1,49 @@
-package br.dev.nina.sprachklang.dictionarysearch.presentation
+
+package br.dev.nina.sprachklang.feature_search.presentation
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import br.dev.nina.sprachklang.core.domain.dictionary.DictionaryRepository
+import br.dev.nina.sprachklang.core.util.DispatcherProvider
 import br.dev.nina.sprachklang.core.util.pagination.QueryPaginator
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class DictionarySearchState @Inject constructor(
+@HiltViewModel
+class SearchViewModel @Inject constructor(
     private val repository: DictionaryRepository,
-    private val coroutineScope: CoroutineScope,
-) {
+    private val dispatcher: DispatcherProvider
+) : ViewModel() {
 
-    var state by mutableStateOf(DictionarySearchUiState())
+    var state by mutableStateOf(SearchState())
         private set
 
     private var searchJob: Job? = null
 
     private val paginator = QueryPaginator(
         initialKey = state.page,
-        onLoadUpdated = {
-            state = state.copy(isLoading = it)
+        onLoadUpdated = { isLoading ->
+            state = state.copy(isLoading = isLoading)
         },
         onRequest = { nextPage, query ->
-            withContext(Dispatchers.IO) {
+            withContext(dispatcher.io) {
                 repository.searchWord(query, nextPage, 20)
             }
         },
         getNextKey = {
             state.page + 1
         },
-        onError = {
-            state = state.copy(error = it)
+        onError = {error ->
+            state = state.copy(error = error)
         },
         onSuccess = { newItems, newKey ->
-            withContext(Dispatchers.Main) {
+            withContext(dispatcher.mainImmediate) {
                 state = state.copy(
                     items = if (state.page == 0) newItems else state.items + newItems,
                     page = newKey,
@@ -59,9 +63,11 @@ class DictionarySearchState @Inject constructor(
                 loadNextItems()
             }
             is DictionarySearchEvent.OnSearchQueryChange -> {
-                state = state.copy(query = event.query, page = 0)
+                state = state.copy(
+                    query = event.query, page = 0
+                )
                 searchJob?.cancel()
-                searchJob = coroutineScope.launch {
+                searchJob = viewModelScope.launch {
                     paginator.reset()
                     loadNextItems()
                 }
@@ -69,8 +75,8 @@ class DictionarySearchState @Inject constructor(
         }
     }
 
-    fun loadNextItems(query: String = state.query.lowercase()) {
-        coroutineScope.launch {
+    private fun loadNextItems(query: String = state.query.lowercase()) {
+        viewModelScope.launch {
             paginator.loadNextItems(query)
         }
     }

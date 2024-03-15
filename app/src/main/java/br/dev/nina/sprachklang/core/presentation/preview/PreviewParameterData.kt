@@ -1,13 +1,9 @@
 package br.dev.nina.sprachklang.core.presentation.preview
 
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Definition
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Entry
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Headword
-
-class HeadwordPreviewParameterProvider: PreviewParameterProvider<List<Headword>> {
-    override val values: Sequence<List<Headword>> = sequenceOf(PreviewParameterData.headwords)
-}
+import br.dev.nina.sprachklang.core.domain.dictionary.model.Wordlist
 
 object PreviewParameterData {
 
@@ -45,4 +41,12 @@ object PreviewParameterData {
         )
     )
 
+    val wordlist = Wordlist(
+        id = 1,
+        name = "Test"
+    )
+
+    val wordlists = (1..10).map {
+        Wordlist(it, "List $it")
+    }
 }
