@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.core.data.db.entities
+package br.dev.nina.sprachklang.core.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

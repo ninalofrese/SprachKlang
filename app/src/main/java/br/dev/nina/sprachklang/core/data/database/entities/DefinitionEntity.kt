@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.core.data.db.entities
+package br.dev.nina.sprachklang.core.data.database.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
@@ -18,7 +18,7 @@ data class DefinitionEntity(
     @PrimaryKey
     @ColumnInfo("def_id")
     val id: String,
-    @ColumnInfo("word_id")
+    @ColumnInfo("word_id", index = true)
     val wordId: Int,
     val glosses: List<String>?,
     val synonyms: List<String>? = null,
