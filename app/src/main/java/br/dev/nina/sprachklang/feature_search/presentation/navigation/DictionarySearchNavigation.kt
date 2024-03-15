@@ -1,9 +1,9 @@
-package br.dev.nina.sprachklang.dictionarysearch.presentation.navigation
+package br.dev.nina.sprachklang.feature_search.presentation.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import br.dev.nina.sprachklang.dictionarysearch.presentation.DictionarySearchRoute
+import br.dev.nina.sprachklang.feature_search.presentation.SearchRoute
 
 const val SEARCH_ROUTE = "search"
 
@@ -16,7 +16,7 @@ fun NavGraphBuilder.searchScreen(
     onNavigateToWordDetail: (Int) -> Unit
 ) {
     composable(route = SEARCH_ROUTE) {
-        DictionarySearchRoute(
+        SearchRoute(
             onNavigateToWordDetail = {
                 onNavigateToWordDetail(it)
             },

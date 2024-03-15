@@ -1,10 +1,10 @@
-package br.dev.nina.sprachklang.wordlist.navigation
+package br.dev.nina.sprachklang.feature_wordlist.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import br.dev.nina.sprachklang.wordlist.WordlistRoute
+import br.dev.nina.sprachklang.feature_wordlist.WordlistRoute
 
 const val WORDLIST_ROUTE = "wordlist"
 

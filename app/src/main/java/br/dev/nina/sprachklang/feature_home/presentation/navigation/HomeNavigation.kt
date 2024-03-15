@@ -1,9 +1,9 @@
-package br.dev.nina.sprachklang.home.presentation.navigation
+package br.dev.nina.sprachklang.feature_home.presentation.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import br.dev.nina.sprachklang.home.presentation.HomeRoute
+import br.dev.nina.sprachklang.feature_home.presentation.HomeRoute
 
 const val HOME_ROUTE = "home"
 

@@ -1,6 +1,6 @@
-package br.dev.nina.sprachklang.word.presentation.audioplayer
+package br.dev.nina.sprachklang.feature_word.presentation.audioplayer
 
-data class AudioUiState(
+data class AudioState(
     val audioUrls: List<String> = emptyList(),
     val word: String = "",
     val langCode: String = ""

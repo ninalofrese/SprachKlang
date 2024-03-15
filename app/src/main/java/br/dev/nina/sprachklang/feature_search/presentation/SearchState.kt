@@ -1,8 +1,8 @@
-package br.dev.nina.sprachklang.dictionarysearch.presentation
+package br.dev.nina.sprachklang.feature_search.presentation
 
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Headword
 
-data class DictionarySearchUiState(
+data class SearchState(
     val query: String = "",
     val isLoading: Boolean = false,
     val items: List<Headword> = emptyList(),

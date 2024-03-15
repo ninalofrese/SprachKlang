@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.word.presentation.audioplayer
+package br.dev.nina.sprachklang.feature_word.presentation.audioplayer
 
 import android.content.Context
 import android.media.AudioAttributes
