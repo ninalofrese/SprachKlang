@@ -20,7 +20,7 @@ leak-canary = "3.0-alpha-1"
 lifecycle = "2.7.0"
 mockk = "1.13.9"
 moshi = "1.15.1"
-turbine = "1.0.0"
+turbine = "1.1.0"
 
 [libraries]
 activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
