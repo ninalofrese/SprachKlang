@@ -2,6 +2,8 @@
 
 Offline-first and accessibility-mindful app to learn the pronunciation of German words.
 
+![sprachklang](https://github.com/ninalofrese/SprachKlang/assets/26123557/e709ca95-4cb1-47c4-b030-07e4db78db16)
+
 ---
 
 ## Features
@@ -24,3 +26,4 @@ Offline-first and accessibility-mindful app to learn the pronunciation of German
 ## Credits
 
 All the data is from [Kaikki](https://kaikki.org/dictionary/German/index.html)'s dump of [Wiktextract](https://github.com/tatuylonen/wiktextract) and it's available at [Wiktionary](https://de.wiktionary.org/wiki/Wiktionary:Hauptseite).
+
