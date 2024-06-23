@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.core.data.dictionary.testdoubles
+package br.dev.nina.sprachklang.core.data.testdoubles
 
 import br.dev.nina.sprachklang.core.domain.dictionary.WordlistRepository
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Definition
@@ -12,8 +12,15 @@ import kotlinx.coroutines.flow.flowOf
 class FakeWordlistRepository: WordlistRepository {
 
     private val entries = entriesTestData
-    private val wordlists = mutableListOf<Wordlist>()
+    val wordlists = mutableListOf<Wordlist>()
     private val savedWordlist = mutableMapOf<Int, Int>()
+    var createWordlistCalled = false
+    var deleteWordlistCalled = false
+    var saveWordCalled = false
+    var createWordlistAndSaveWordCalled = false
+    var unsaveWordCalled = false
+    var unsaveWordId = -1
+    var isError = false
 
     override fun getWordlists(): Flow<List<Wordlist>> {
         return flow { wordlists }
@@ -35,23 +42,33 @@ class FakeWordlistRepository: WordlistRepository {
     }
 
     override suspend fun createWordlist(wordlist: Wordlist) {
+        createWordlistCalled = true
+        if (isError) throw Exception("Failed to add")
         wordlists.add(wordlist)
     }
 
     override suspend fun createWordlistAndSaveWord(wordlist: Wordlist, wordId: Int) {
+        createWordlistAndSaveWordCalled = true
         wordlists.add(wordlist)
         savedWordlist[wordId] = wordlist.id
     }
 
     override suspend fun deleteWordlist(wordlist: Wordlist) {
+        deleteWordlistCalled = true
+        if (isError) throw Exception("Failed to delete")
         wordlists.remove(wordlist)
     }
 
     override suspend fun saveWord(wordlistId: Int, wordId: Int) {
+        saveWordCalled = true
+        if (isError) throw Exception("Failed to save word")
         savedWordlist[wordId] = wordlistId
     }
 
     override suspend fun unsaveWord(wordlistId: Int, wordId: Int) {
+        unsaveWordCalled = true
+        unsaveWordId = wordId
+        if (isError) throw Exception("Failed to unsave word")
         savedWordlist.remove(wordId,wordlistId)
     }
 
@@ -59,6 +76,15 @@ class FakeWordlistRepository: WordlistRepository {
         return flow { wordlists.find { wordId == it.id } }
     }
 
+    fun reset() {
+        createWordlistCalled = false
+        deleteWordlistCalled = false
+        createWordlistAndSaveWordCalled = false
+        saveWordCalled = false
+        unsaveWordCalled = false
+        unsaveWordId = -1
+        isError = false
+    }
 }
 
 val entriesTestData = (1..10).map {
