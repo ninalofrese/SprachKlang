@@ -39,7 +39,7 @@ class SearchViewModel @Inject constructor(
         getNextKey = {
             state.page + 1
         },
-        onError = {error ->
+        onError = { error ->
             state = state.copy(error = error)
         },
         onSuccess = { newItems, newKey ->
