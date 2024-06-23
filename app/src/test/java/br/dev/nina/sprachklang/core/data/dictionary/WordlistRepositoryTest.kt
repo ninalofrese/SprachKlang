@@ -7,7 +7,7 @@ import br.dev.nina.sprachklang.core.TestDispatchers
 import br.dev.nina.sprachklang.core.data.WordlistRepositoryImpl
 import br.dev.nina.sprachklang.core.data.database.WordlistDao
 import br.dev.nina.sprachklang.core.data.database.entities.WordlistEntity
-import br.dev.nina.sprachklang.core.data.dictionary.testdoubles.dummyEntryResults
+import br.dev.nina.sprachklang.core.data.testdoubles.dummyEntryResults
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Wordlist
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery

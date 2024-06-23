@@ -81,4 +81,5 @@ dependencies {
     androidTestImplementation(libs.bundles.testing.android)
 
     debugImplementation(libs.bundles.compose.debug)
+    debugImplementation(libs.leak.canary)
 }

@@ -1,8 +1,9 @@
-package br.dev.nina.sprachklang.core.data.dictionary.testdoubles
+package br.dev.nina.sprachklang.core.data.testdoubles
 
 import br.dev.nina.sprachklang.core.data.database.entities.DefinitionEntity
 import br.dev.nina.sprachklang.core.data.database.entities.EntryResult
 import br.dev.nina.sprachklang.core.data.database.entities.HeadwordEntity
+import br.dev.nina.sprachklang.core.domain.dictionary.model.Headword
 
 fun dummyHeadwordEntity(id: Int) = HeadwordEntity(
     id = id,
@@ -23,3 +24,10 @@ fun dummyEntryResults(size: Int = 1, wordId: Int = 1) = (1..size).map { definiti
         ))
     )
 }
+
+fun dummyHeadword(id: Int) = Headword(
+    id = id,
+    pos = "adv",
+    word = "genau",
+    langCode = "de"
+)

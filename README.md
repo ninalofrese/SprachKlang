@@ -14,7 +14,7 @@ Offline-first and accessibility-mindful app to learn the pronunciation of German
 ## Tech stack
 
 - Minimum SDK level 24
-- 100% Kotlin based + Coroutines + Flow for asynchronou
+- 100% Kotlin based + Coroutines + Flow for asynchronous
 - Hilt for dependency injection
 - Jetpack Compose for declarative UI + Material3
 - Room for all the data

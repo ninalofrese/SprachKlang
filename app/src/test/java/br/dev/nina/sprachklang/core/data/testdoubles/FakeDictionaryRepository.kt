@@ -1,4 +1,4 @@
-package br.dev.nina.sprachklang.core.data.dictionary.testdoubles
+package br.dev.nina.sprachklang.core.data.testdoubles
 
 import br.dev.nina.sprachklang.core.domain.dictionary.DictionaryRepository
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Entry
@@ -23,4 +23,11 @@ class FakeDictionaryRepository : DictionaryRepository {
         )
     }
 
+    fun addHeadwords(vararg words: Headword) {
+        headwords.addAll(words)
+    }
+
+    fun addWordDetails(vararg wordDetail: Entry) {
+        entries.addAll(wordDetail)
+    }
 }
