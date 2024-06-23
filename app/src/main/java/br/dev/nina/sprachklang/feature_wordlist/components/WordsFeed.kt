@@ -25,8 +25,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.invisibleToUser
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import br.dev.nina.sprachklang.R
@@ -55,16 +61,23 @@ fun WordsFeed(
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun WordItem(
     entry: Entry,
     onItemClick: (Int) -> Unit,
     onItemDelete: () -> Unit
 ) {
+    val context = LocalContext.current
     var openDeleteDialog by rememberSaveable { mutableStateOf(false) }
 
     Card(modifier = Modifier
         .fillMaxWidth()
+        .semantics { customActions = listOf(
+            CustomAccessibilityAction(label = context.getString(R.string.delete)) {
+                openDeleteDialog = true; true
+            }
+        ) }
         .clickable { onItemClick(entry.id) }) {
         Row(Modifier.padding(16.dp)) {
             Column(modifier = Modifier.weight(1f)) {
@@ -80,6 +93,7 @@ fun WordItem(
 
             IconButton(
                 onClick = { openDeleteDialog = true },
+                modifier = Modifier.semantics { invisibleToUser() }
             ) {
                 Icon(imageVector = Icons.Default.Delete, contentDescription = stringResource(R.string.delete_name, entry.word))
             }
