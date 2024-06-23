@@ -2,11 +2,6 @@
 
 Offline-first and accessibility-mindful app to learn the pronunciation of German words.
 
-<p align="center" width="100%">
-  <br/>
-  <img src="https://github.com/ninalofrese/SprachKlang/assets/26123557/e709ca95-4cb1-47c4-b030-07e4db78db16" width=450 alt="Demo animated gif shows adding the new word Eichhörchen in the search bar, clicking on the pronunciation button to listen, then saving it to a new list named Animals and navigating back to show the wordlist" />
-</p>
-
 ---
 
 ## Features
@@ -15,6 +10,11 @@ Offline-first and accessibility-mindful app to learn the pronunciation of German
 - Show the word definition in English
 - Play the pronunciation audio (internet connection required)
 - Create wordlists and add words to it
+
+<p align="center" width="100%">
+  <br/>
+  <img src="https://github.com/ninalofrese/SprachKlang/assets/26123557/e709ca95-4cb1-47c4-b030-07e4db78db16" width=400 alt="Demo animated gif shows adding the new word Eichhörchen in the search bar, clicking on the pronunciation button to listen, then saving it to a new list named Animals and navigating back to show the wordlist" />
+</p>
 
 ## Tech stack
 
