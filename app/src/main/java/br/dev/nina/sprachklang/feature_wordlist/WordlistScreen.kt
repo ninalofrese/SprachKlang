@@ -29,6 +29,7 @@ import br.dev.nina.sprachklang.R
 import br.dev.nina.sprachklang.core.presentation.components.EmptyState
 import br.dev.nina.sprachklang.core.presentation.components.ErrorBox
 import br.dev.nina.sprachklang.core.presentation.preview.DevicePreview
+import br.dev.nina.sprachklang.feature_word.presentation.audioplayer.AudioPlayerManager
 import br.dev.nina.sprachklang.feature_wordlist.components.WordsFeed
 import br.dev.nina.sprachklang.feature_wordlist.preview.WordlistStateParameterProvider
 import br.dev.nina.sprachklang.ui.theme.SprachKlangTheme
@@ -45,6 +46,7 @@ fun WordlistRoute(
     onNavigateToSearch: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val audioPlayerState = viewModel.audioPlayerManager
 
     WordlistScreen(
         state = state,
@@ -52,7 +54,8 @@ fun WordlistRoute(
         onNavigateBack = onNavigateBack,
         onNavigateToWord = onNavigateToWord,
         onEvent = viewModel::onEvent,
-        onNavigateToSearch = onNavigateToSearch
+        onNavigateToSearch = onNavigateToSearch,
+        audioPlayerManager = audioPlayerState
     )
 }
 
@@ -63,7 +66,8 @@ fun WordlistScreen(
     onNavigateBack: () -> Unit,
     onNavigateToWord: (Int) -> Unit,
     onNavigateToSearch: () -> Unit,
-    onEvent: (WordlistEvent) -> Unit
+    onEvent: (WordlistEvent) -> Unit,
+    audioPlayerManager: AudioPlayerManager
 ) {
 
     if (state.wordlist == null || state.error != null) {
@@ -75,7 +79,8 @@ fun WordlistScreen(
             onNavigateBack = onNavigateBack,
             onNavigateToWord = onNavigateToWord,
             onNavigateToSearch = onNavigateToSearch,
-            onEvent = onEvent
+            onEvent = onEvent,
+            audioPlayerManager = audioPlayerManager
         )
     }
 }
@@ -88,7 +93,8 @@ fun WordlistContent(
     onNavigateBack: () -> Unit,
     onNavigateToWord: (Int) -> Unit,
     onNavigateToSearch: () -> Unit,
-    onEvent: (WordlistEvent) -> Unit
+    onEvent: (WordlistEvent) -> Unit,
+    audioPlayerManager: AudioPlayerManager
 ) {
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -131,6 +137,7 @@ fun WordlistContent(
                         state = state,
                         onNavigateToWord = onNavigateToWord,
                         onEvent = onEvent,
+                        audioPlayer = audioPlayerManager
                     )
                 } else {
                     EmptyState(
@@ -154,7 +161,7 @@ private fun WordCollectionScreenPreview(
     state: WordlistState
 ) {
     SprachKlangTheme {
-        WordlistScreen(state = state, snackBarFlow = MutableSharedFlow<String>().asSharedFlow(), {}, {}, {}, {})
+        WordlistScreen(state = state, snackBarFlow = MutableSharedFlow<String>().asSharedFlow(), {}, {}, {}, {}, AudioPlayerManager())
     }
 }
 

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.dev.nina.sprachklang.core.domain.dictionary.WordlistRepository
 import br.dev.nina.sprachklang.core.util.Resource
+import br.dev.nina.sprachklang.feature_word.presentation.audioplayer.AudioPlayerManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +28,8 @@ class WordlistViewModel @Inject constructor(
 
     private val _snackBarFlow = MutableSharedFlow<String>()
     val snackBarFlow = _snackBarFlow.asSharedFlow()
+
+    val audioPlayerManager = AudioPlayerManager()
 
     init {
         wordlistId?.let {

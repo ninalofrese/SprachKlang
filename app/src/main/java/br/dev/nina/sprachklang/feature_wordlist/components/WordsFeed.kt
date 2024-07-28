@@ -21,6 +21,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -38,6 +39,9 @@ import androidx.compose.ui.unit.dp
 import br.dev.nina.sprachklang.R
 import br.dev.nina.sprachklang.core.domain.dictionary.model.Entry
 import br.dev.nina.sprachklang.core.presentation.utils.localize
+import br.dev.nina.sprachklang.feature_word.presentation.audioplayer.AudioChips
+import br.dev.nina.sprachklang.feature_word.presentation.audioplayer.AudioPlayerManager
+import br.dev.nina.sprachklang.feature_word.presentation.audioplayer.AudioState
 import br.dev.nina.sprachklang.feature_wordlist.WordlistEvent
 import br.dev.nina.sprachklang.feature_wordlist.WordlistState
 
@@ -45,7 +49,8 @@ import br.dev.nina.sprachklang.feature_wordlist.WordlistState
 fun WordsFeed(
     state: WordlistState,
     onNavigateToWord: (Int) -> Unit,
-    onEvent: (WordlistEvent) -> Unit
+    onEvent: (WordlistEvent) -> Unit,
+    audioPlayer: AudioPlayerManager
 ) {
     LazyColumn(
         Modifier
@@ -55,7 +60,8 @@ fun WordsFeed(
             WordItem(
                 entry = entry,
                 onItemClick = onNavigateToWord,
-                onItemDelete = { onEvent(WordlistEvent.UnsaveWord(entry.id)) }
+                onItemDelete = { onEvent(WordlistEvent.UnsaveWord(entry.id)) },
+                audioPlayer = audioPlayer
             )
         }
     }
@@ -66,10 +72,19 @@ fun WordsFeed(
 fun WordItem(
     entry: Entry,
     onItemClick: (Int) -> Unit,
-    onItemDelete: () -> Unit
+    onItemDelete: () -> Unit,
+    audioPlayer: AudioPlayerManager
 ) {
     val context = LocalContext.current
     var openDeleteDialog by rememberSaveable { mutableStateOf(false) }
+
+    val audioState = AudioState(
+        audioUrls = entry.audioUrls ?: emptyList(),
+        word = entry.word,
+        langCode = entry.langCode
+    )
+
+    val currentPlayingMedia by audioPlayer.currentPlayingMedia.collectAsState()
 
     Card(modifier = Modifier
         .fillMaxWidth()
@@ -79,7 +94,9 @@ fun WordItem(
             }
         ) }
         .clickable { onItemClick(entry.id) }) {
-        Row(Modifier.padding(16.dp)) {
+        Row(
+            Modifier.padding(16.dp),
+        ) {
             Column(modifier = Modifier.weight(1f)) {
                 Text(
                     text = entry.word.localize(entry.langCode),
@@ -89,6 +106,8 @@ fun WordItem(
                 Text(text = entry.pos, style = MaterialTheme.typography.bodyMedium)
                 Spacer(Modifier.height(8.dp))
                 Text(text = entry.definitions.map { it.glosses?.joinToString() }.joinToString("; "))
+                Spacer(Modifier.height(8.dp))
+                AudioChips(audioState, currentPlayingMedia, audioPlayer)
             }
 
             IconButton(
